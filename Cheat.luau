@@ -1,6 +1,7 @@
 local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 
+-- GUI creation
 local gui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
 gui.Name = "RockStealer"
 gui.ResetOnSpawn = false
@@ -15,6 +16,7 @@ frame.Active = true
 frame.Draggable = true
 frame.Parent = gui
 
+-- Title
 local label = Instance.new("TextLabel")
 label.Size = UDim2.new(1, -30, 0, 25)
 label.Position = UDim2.new(0, 5, 0, 5)
@@ -25,6 +27,7 @@ label.Font = Enum.Font.Arcade
 label.TextScaled = true
 label.Parent = frame
 
+-- Close button
 local close = Instance.new("TextButton")
 close.Size = UDim2.new(0, 25, 0, 25)
 close.Position = UDim2.new(1, -30, 0, 5)
@@ -40,6 +43,7 @@ close.MouseButton1Click:Connect(function()
 	gui:Destroy()
 end)
 
+-- TextBox
 local textbox = Instance.new("TextBox")
 textbox.Text = "Username"
 textbox.Size = UDim2.new(0.45, 0, 0, 40)
@@ -53,6 +57,7 @@ textbox.TextScaled = true
 textbox.ClearTextOnFocus = true
 textbox.Parent = frame
 
+-- Button
 local button = Instance.new("TextButton")
 button.Text = "Target"
 button.Size = UDim2.new(0.45, 0, 0, 40)
@@ -65,6 +70,7 @@ button.Font = Enum.Font.Arcade
 button.TextScaled = true
 button.Parent = frame
 
+-- Functional vars
 local username = ""
 
 textbox:GetPropertyChangedSignal("Text"):Connect(function()
@@ -85,6 +91,7 @@ button.MouseButton1Click:Connect(function()
 				if handle then
 					local prompt = handle:FindFirstChildWhichIsA("ProximityPrompt")
 					if prompt then
+						-- Move player to rock and interact
 						if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
 							player.Character:MoveTo(handle.Position + Vector3.new(0, 3, 0))
 							task.wait(0.2)
